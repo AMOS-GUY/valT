@@ -13,6 +13,8 @@
         overflow: hidden;
         text-align: center;
         color: #fff;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
 
       /* Floating Hearts */
@@ -35,12 +37,21 @@
       }
 
       .container {
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 20px;
+        box-sizing: border-box;
+      }
+      .container img {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        max-width: 80vw;
       }
 
       img {
@@ -54,10 +65,14 @@
       h1 {
         margin-top: 20px;
         font-size: 28px;
+        padding: 0 15px;
       }
 
       .buttons {
         margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
       button {
@@ -82,13 +97,30 @@
       #loveSection {
         display: none;
         max-width: 600px;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      #typewriter {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        line-height: 1.6;
+      }
+
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
       }
 
       .gallery img {
         width: 100px;
         height: 100px;
         border-radius: 10px;
-        margin: 5px;
+        /* margin: 5px; */
+        object-fit: cover;
       }
 
       #countdown {
@@ -97,11 +129,16 @@
       }
 
       .brand {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        font-weight: bold;
-        font-size: 20px;
+        position: sticky;
+        top: 0px;
+        /* left: 10px; */
+        background: rgba(0, 0, 0, 0.2);
+        /* font-weight: bold; */
+        padding: 10px;
+        /* font-size: bold; */
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+        border-radius: 20px;
         /* color: lightpink; */
       }
 
@@ -114,6 +151,31 @@
 
       .black {
         background: black !important;
+      }
+
+      @media (max-width: 600px) {
+        .container img {
+          width: 180px;
+          height: 180px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        button {
+          font-size: 16px;
+          padding: 10px 20px;
+        }
+
+        .gallery img {
+          width: 80px;
+          height: 80px;
+        }
+
+        #loveSection {
+          padding: 10px;
+        }
       }
     </style>
   </head>
@@ -145,7 +207,10 @@
 
         <div id="countdown"></div>
 
-        <h3>Our Memories 📸</h3>
+        <h3>
+          Best Memories I have about are here but I wish we will have more and
+          more you know that already... 📸
+        </h3>
 
         <div class="gallery">
           <img src="eyes.jpg" /> <img src="pic1.jpg" />
