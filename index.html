@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q_Twiin❤️</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+        overflow: hidden;
+        text-align: center;
+        color: #fff;
+      }
+
+      /* Floating Hearts */
+      .heart {
+        position: absolute;
+        color: #ff4d88;
+        font-size: 20px;
+        animation: float 6s linear infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-10vh);
+          opacity: 0;
+        }
+      }
+
+      .container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      img {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+      }
+
+      h1 {
+        margin-top: 20px;
+        font-size: 28px;
+      }
+
+      .buttons {
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        margin: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      #yesBtn {
+        background: #ff4d88;
+        color: white;
+      }
+
+      #noBtn {
+        background: #ffffffaa;
+      }
+
+      #loveSection {
+        display: none;
+        max-width: 600px;
+      }
+
+      .gallery img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        margin: 5px;
+      }
+
+      #countdown {
+        margin-top: 15px;
+        font-size: 18px;
+      }
+
+      .brand {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        font-weight: bold;
+        font-size: 20px;
+        /* color: lightpink; */
+      }
+
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+
+      .black {
+        background: black !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="brand">
+      For you mylo, my_Love, my_Q_Twiin❤️, my_Gatsiri❤️, my_wifieee, my_Quees,
+      my_Mommy, my_Looo, my_Teta, my_Bby, my_Babe, ...everything 💞
+    </div>
+
+    <audio id="bgMusic" loop>
+      <source src="music.mp3" type="audio/mp3" />
+    </audio>
+
+    <canvas id="confetti"></canvas>
+
+    <div class="container" id="mainContainer">
+      <img src="val.jpg" />
+
+      <h1 id="question">Will you be my Valentine? 💖</h1>
+
+      <div class="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 💔</button>
+      </div>
+
+      <div id="loveSection">
+        <h2 id="typewriter"></h2>
+
+        <div id="countdown"></div>
+
+        <h3>Our Memories 📸</h3>
+
+        <div class="gallery">
+          <img src="eyes.jpg" /> <img src="pic1.jpg" />
+          <img src="pic2.jpg" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* AUTOPLAY MUSIC (works after first click) */
+      document.body.addEventListener(
+        "click",
+        () => {
+          document.getElementById("bgMusic").play();
+        },
+        { once: true },
+      );
+
+      /* FLOATING HEARTS */
+      setInterval(() => {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 400);
+
+      /* TYPEWRITER LOVE MESSAGE */
+      const text = `Been a long time here together, not months, not a year or two, just a long time, I know we can count it out but counting the memories, I don't think we can count them all, and we are still going, 6 or 7 years are now feeling far but sometimes it feels closer because of the way you make my life feel like warm and cared for, I am always thankful for you...❤️
+You are my happiness, my best friend, my peace and my favorite person.
+Distance means nothing when someone means everything.
+I love you always 💕`;
+
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          document.getElementById("typewriter").innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 40);
+        }
+      }
+
+      /* COUNTDOWN SINCE RELATIONSHIP START */
+      const startDate = new Date("January 1 2018");
+
+      function updateCountdown() {
+        let now = new Date();
+        let diff = now - startDate;
+
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("countdown").innerText =
+          "We have been together for " +
+          days +
+          " days ❤️ [I know the days are not precise but I tried 😂]";
+      }
+      setInterval(updateCountdown, 1000);
+
+      /* BUTTON LOGIC */
+      let noClicks = 0;
+
+      document.getElementById("yesBtn").onclick = () => {
+        document.getElementById("loveSection").style.display = "block";
+        document.getElementById("question").style.display = "none";
+        document.querySelector(".buttons").style.display = "none";
+
+        typeWriter();
+        fireworks();
+        confettiStart();
+      };
+
+      document.getElementById("noBtn").onclick = () => {
+        noClicks++;
+
+        if (noClicks < 5) {
+          document.getElementById("noBtn").innerText = "Please 😭";
+        }
+
+        if (noClicks === 5) {
+          document.getElementById("question").innerText = "Okay...";
+          document.querySelector(".buttons").style.display = "none";
+
+          setTimeout(() => {
+            document.body.classList.add("black");
+            document.getElementById("mainContainer").innerHTML = "";
+          }, 3000);
+        }
+      };
+
+      /* CONFETTI */
+      const canvas = document.getElementById("confetti");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let confetti = [];
+      function confettiStart() {
+        for (let i = 0; i < 150; i++) {
+          confetti.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 6 + 2,
+            d: Math.random() * 150,
+          });
+        }
+        drawConfetti();
+      }
+
+      function drawConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach((p) => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = "white";
+          ctx.fill();
+          p.y += 2;
+          if (p.y > canvas.height) p.y = 0;
+        });
+        requestAnimationFrame(drawConfetti);
+      }
+
+      /* SIMPLE FIREWORKS */
+      function fireworks() {
+        for (let i = 0; i < 20; i++) {
+          setTimeout(() => {
+            let fw = document.createElement("div");
+            fw.className = "heart";
+            fw.innerHTML = "💥";
+            fw.style.left = Math.random() * 100 + "vw";
+            fw.style.top = Math.random() * 100 + "vh";
+            fw.style.fontSize = "30px";
+            document.body.appendChild(fw);
+            setTimeout(() => fw.remove(), 1000);
+          }, i * 200);
+        }
+      }
+
+      /* EASTER EGG (tap brand 5 times) */
+      let secret = 0;
+      document.querySelector(".brand").onclick = () => {
+        secret++;
+        if (secret === 5) {
+          alert("You found a secret message 😘 Amo-Rine forever!");
+        }
+      };
+    </script>
+  </body>
+</html>
